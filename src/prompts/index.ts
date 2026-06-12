@@ -2,10 +2,12 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 
 export function registerPrompts(server: McpServer): void {
-  server.prompt(
+  server.registerPrompt(
     'architecture-review',
-    'Review a feature using indexed project knowledge and identify architectural concerns',
-    { feature: z.string().describe('The feature or component to review') },
+    {
+      description: 'Review a feature using indexed project knowledge and identify architectural concerns',
+      argsSchema: { feature: z.string().describe('The feature or component to review') }
+    },
     ({ feature }) => ({
       messages: [
         {
@@ -19,10 +21,12 @@ export function registerPrompts(server: McpServer): void {
     }),
   );
 
-  server.prompt(
+  server.registerPrompt(
     'impact-analysis',
-    'Analyze potential impact of changes to a module',
-    { module: z.string().describe('The module to analyze') },
+    {
+      description: 'Analyze potential impact of changes to a module',
+      argsSchema: { module: z.string().describe('The module to analyze') }
+    },
     ({ module }) => ({
       messages: [
         {
@@ -36,10 +40,12 @@ export function registerPrompts(server: McpServer): void {
     }),
   );
 
-  server.prompt(
+  server.registerPrompt(
     'implementation-guide',
-    'Generate implementation guidance for a feature',
-    { feature: z.string().describe('The feature to implement') },
+    {
+      description: 'Generate implementation guidance for a feature',
+      argsSchema: { feature: z.string().describe('The feature to implement') }
+    },
     ({ feature }) => ({
       messages: [
         {

@@ -3,11 +3,13 @@ import { z } from 'zod';
 import { GatewayClient } from '../gateway-client.js';
 
 export function registerDocumentsTools(server: McpServer, client: GatewayClient): void {
-  server.tool(
+  server.registerTool(
     'list_documents',
-    'List indexed documents, optionally filtered by project',
     {
-      project: z.string().optional().describe('Project ID to filter by'),
+      description: 'List indexed documents, optionally filtered by project',
+      inputSchema: {
+        project: z.string().optional().describe('Project ID to filter by'),
+      }
     },
     async ({ project }) => {
       const result = await client.listDocuments(project);
@@ -17,13 +19,15 @@ export function registerDocumentsTools(server: McpServer, client: GatewayClient)
     },
   );
 
-  server.tool(
+  server.registerTool(
     'index_document',
-    'Submit a new document for indexing into the knowledge base',
     {
-      title: z.string().describe('Document title'),
-      content: z.string().describe('Document content to index'),
-      source: z.string().default('manual').describe('Source identifier'),
+      description: 'Submit a new document for indexing into the knowledge base',
+      inputSchema: {
+        title: z.string().describe('Document title'),
+        content: z.string().describe('Document content to index'),
+        source: z.string().default('manual').describe('Source identifier'),
+      }
     },
     async ({ title, content, source }) => {
       const result = await client.indexDocument(title, content, source);
@@ -33,11 +37,13 @@ export function registerDocumentsTools(server: McpServer, client: GatewayClient)
     },
   );
 
-  server.tool(
+  server.registerTool(
     'delete_document',
-    'Delete a document and its associated vectors',
     {
-      id: z.string().describe('Document ID to delete'),
+      description: 'Delete a document and its associated vectors',
+      inputSchema: {
+        id: z.string().describe('Document ID to delete'),
+      }
     },
     async ({ id }) => {
       await client.deleteDocument(id);

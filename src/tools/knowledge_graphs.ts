@@ -3,11 +3,13 @@ import { z } from 'zod';
 import { GatewayClient } from '../gateway-client.js';
 
 export function registerKnowledgeGraphsTools(server: McpServer, client: GatewayClient): void {
-  server.tool(
+  server.registerTool(
     'list_knowledge_graphs',
-    'List indexed knowledge graphs, optionally filtered by project',
     {
-      project: z.string().optional().describe('Project ID to filter by'),
+      description: 'List indexed knowledge graphs, optionally filtered by project',
+      inputSchema: {
+        project: z.string().optional().describe('Project ID to filter by'),
+      }
     },
     async ({ project }) => {
       const result = await client.listKnowledgeGraphs(project);
@@ -17,11 +19,13 @@ export function registerKnowledgeGraphsTools(server: McpServer, client: GatewayC
     },
   );
 
-  server.tool(
+  server.registerTool(
     'delete_knowledge_graph',
-    'Delete a knowledge graph and its associated vectors',
     {
-      id: z.string().describe('Knowledge Graph ID to delete'),
+      description: 'Delete a knowledge graph and its associated vectors',
+      inputSchema: {
+        id: z.string().describe('Knowledge Graph ID to delete'),
+      }
     },
     async ({ id }) => {
       await client.deleteKnowledgeGraph(id);

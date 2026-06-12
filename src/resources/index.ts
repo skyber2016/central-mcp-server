@@ -2,9 +2,10 @@ import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mc
 import { GatewayClient } from '../gateway-client.js';
 
 export function registerResources(server: McpServer, client: GatewayClient): void {
-  server.resource(
+  server.registerResource(
     'documents',
     'knowledge://documents',
+    { description: 'List of all indexed documents in the gateway' },
     async (uri) => {
       const result = await client.listDocuments();
       return {
@@ -19,9 +20,10 @@ export function registerResources(server: McpServer, client: GatewayClient): voi
     },
   );
 
-  server.resource(
+  server.registerResource(
     'projects',
     'knowledge://projects',
+    { description: 'List of all projects in the Knowledge Gateway' },
     async (uri) => {
       const result = await client.listProjects();
       return {

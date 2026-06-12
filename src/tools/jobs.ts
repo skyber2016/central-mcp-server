@@ -3,11 +3,13 @@ import { z } from 'zod';
 import { GatewayClient } from '../gateway-client.js';
 
 export function registerJobsTool(server: McpServer, client: GatewayClient): void {
-  server.tool(
+  server.registerTool(
     'get_index_job',
-    'Get the status of an indexing job',
     {
-      jobId: z.string().describe('The index job ID'),
+      description: 'Get the status of an indexing job',
+      inputSchema: {
+        jobId: z.string().describe('The job ID to check'),
+      }
     },
     async ({ jobId }) => {
       const result = await client.getJobStatus(jobId);
