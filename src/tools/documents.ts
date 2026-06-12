@@ -32,4 +32,18 @@ export function registerDocumentsTools(server: McpServer, client: GatewayClient)
       };
     },
   );
+
+  server.tool(
+    'delete_document',
+    'Delete a document and its associated vectors',
+    {
+      id: z.string().describe('Document ID to delete'),
+    },
+    async ({ id }) => {
+      await client.deleteDocument(id);
+      return {
+        content: [{ type: 'text' as const, text: `Document ${id} deleted successfully` }],
+      };
+    },
+  );
 }

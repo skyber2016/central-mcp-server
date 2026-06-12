@@ -44,4 +44,20 @@ export class GatewayClient {
     const { data } = await this.http.get(`/documents/jobs/${jobId}`);
     return data;
   }
+
+  async deleteDocument(id: string): Promise<void> {
+    const { data } = await this.http.delete(`/admin/documents/${id}`);
+    return data;
+  }
+
+  async listKnowledgeGraphs(projectId?: string): Promise<unknown> {
+    const params = projectId ? { projectId } : {};
+    const { data } = await this.http.get('/admin/knowledge-graphs', { params });
+    return data;
+  }
+
+  async deleteKnowledgeGraph(id: string): Promise<void> {
+    const { data } = await this.http.delete(`/admin/knowledge-graphs/${id}`);
+    return data;
+  }
 }
