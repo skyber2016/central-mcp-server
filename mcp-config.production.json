@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "knowledge-gateway": {
+      "command": "node",
+      "args": [
+        "C:/Users/duynh2/Projects/central-service/apps/mcp-server/dist/index.js"
+      ],
+      "env": {
+        "KGW_API_KEY": "YOUR_PRODUCTION_KGW_API_KEY",
+        "KGW_API_URL": "https://api.your-production-gateway.com"
+      }
+    }
+  }
+}
