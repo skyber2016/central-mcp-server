@@ -1,11 +1,12 @@
 {
-  "name": "mcp-server",
+  "name": "central-mcp-server",
   "version": "1.0.0",
-  "private": true,
   "description": "MCP Server for Central Knowledge Gateway",
   "type": "module",
+  "bin": "./dist/index.js",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "start": "node dist/index.js",
     "start:dev": "tsx src/index.ts",
     "test": "jest --config jest.config.cjs"
