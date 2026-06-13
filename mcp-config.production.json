@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "central-knowledge-gateway": {
+      "command": "npx",
+      "args": [
+        "github:skyber2016/central-mcp-server"
+      ],
+      "env": {
+        "CKG_API_KEY": "YOUR_PRODUCTION_CKG_API_KEY",
+        "CKG_API_URL": "https://api.your-production-gateway.com"
+      }
+    }
+  }
+}

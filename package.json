@@ -1,0 +1,27 @@
+{
+  "name": "central-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for Central Knowledge Gateway",
+  "type": "module",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "start": "node dist/index.js",
+    "start:dev": "tsx src/index.ts",
+    "test": "jest --config jest.config.cjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "axios": "^1.17.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.4",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.3"
+  }
+}
